@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,6 +10,7 @@
  * @author fatec-dsm2
  */
 public class Loja {
+
     private String razaoSocial;
     private String cpfCliente;
     private double valorCompra;
@@ -64,7 +67,19 @@ public class Loja {
     public void setValorTotalCompra(double valorTotalCompra) {
         this.valorTotalCompra = valorTotalCompra;
     }
+
+    public void inserirDadosLoja() {
+        setRazaoSocial(JOptionPane.showInputDialog("Digite a razão social: "));
+        setCpfCliente(JOptionPane.showInputDialog("Digite o cpf do cliente: "));
+        setValorCompra(Double.parseDouble(JOptionPane.showInputDialog("Digite o valor: ")));
+        setQtdItensComp(Double.parseDouble(JOptionPane.showInputDialog("Digite a quantidade de itens: ")));     
+    }
+    public String MostrarDadosLoja(){
+        return "Razão Social: "+getRazaoSocial()+"\n"+"CPF: "+getCpfCliente();
+    }
     
-    
-    
+    public double calcularCompraLoja(){
+        setValorTotalCompra(getQtdItensComp()*getValorCompra());
+        return getValorTotalCompra();
+    }
 }
