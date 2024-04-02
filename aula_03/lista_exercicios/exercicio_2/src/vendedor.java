@@ -61,10 +61,13 @@ public class vendedor {
          
     }
     public void entrarSalarioBase(){
-        setSalarioBase(Double.parseDouble(JOptionPane.showInputDialog("Digite o nome do funcionário")));
+        setSalarioBase(Double.parseDouble(JOptionPane.showInputDialog("Digite o valor base do salário")));
     }
-    
+    public void entrarValorVenda(){
+        setValorVendido(Double.parseDouble(JOptionPane.showInputDialog("Digite o valor que foi vendido pelo vendedor")));
+    }
     public double calculoComissao(double valorVendido){
+        valorVendido = getValorVendido();
         setNovoSalario(((getValorVendido()*100)/100)+getSalarioBase());
         return getNovoSalario();
     }

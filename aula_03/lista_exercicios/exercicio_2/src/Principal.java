@@ -27,11 +27,13 @@ public class Principal {
                     ven.entrarSalarioBase();
                     break;
                 case 3:
-
+                    ven.entrarValorVenda();
                     break;
                 case 4:
-
-                    break;
+                    double ar = 0;
+                    ven.calculoComissao(ar);
+                     JOptionPane.showMessageDialog(null,"o valor total que o vendedor "+ven.getNome()+"é igual a "+ven.getNovoSalario());
+                    break;    
                 case 0:
                     JOptionPane.showMessageDialog(null, "Finalizando o programa");
                     break;
