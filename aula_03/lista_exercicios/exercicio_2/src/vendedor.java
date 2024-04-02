@@ -68,7 +68,7 @@ public class vendedor {
     }
     public double calculoComissao(double valorVendido){
         valorVendido = getValorVendido();
-        setNovoSalario(((getValorVendido()*100)/100)+getSalarioBase());
+        setNovoSalario(((getValorVendido()*10)/100)+getSalarioBase());
         return getNovoSalario();
     }
 }
