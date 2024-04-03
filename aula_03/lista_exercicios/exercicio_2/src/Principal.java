@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
  *
  * @author fatec-dsm2
  */
-public class Principal {
+public class Principal { 
 
     /**
      * @param args the command line arguments
@@ -32,7 +32,7 @@ public class Principal {
                 case 4:
                     double ar = 0;
                     ven.calculoComissao(ar);
-                     JOptionPane.showMessageDialog(null,"o valor total que o vendedor "+ven.getNome()+"é igual a "+ven.getNovoSalario());
+                     JOptionPane.showMessageDialog(null,"o valor total que o vendedor "+ven.getNome()+" é igual a "+ven.getNovoSalario());
                     break;    
                 case 0:
                     JOptionPane.showMessageDialog(null, "Finalizando o programa");
