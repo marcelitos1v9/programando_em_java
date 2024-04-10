@@ -57,5 +57,9 @@ public class Cliente {
         this.email = email;
     }
     
-    
+    public void cadastrar(){
+    String sql;
+    String sql = "INSERT INTO Cliente (codigo, nome, telefone, email) VALUES (" + getCodigo() + ", '" + getNome() + "', '" + getTelefone() + "', '" + getEmail() + "')";
+
+    }
 }
