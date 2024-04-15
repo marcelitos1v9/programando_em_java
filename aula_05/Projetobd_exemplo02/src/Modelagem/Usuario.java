@@ -14,11 +14,12 @@ import javax.swing.JOptionPane;
  * @author fatec-dsm2
  */
 public class Usuario {
+
     private String nome;
     private String email;
 
-    Conexao con = new Conexao(); 
-            
+    Conexao con = new Conexao();
+
     public Usuario() {
     }
 
@@ -42,21 +43,21 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-        public void cadastrar(){
+
+    public void cadastrar() {
         String sql;
-        sql= "insert into usuario(nome,email) values ('" + getNome() + "' , '" + getEmail() + "')" ;
-        
+        sql = "insert into usuario(nome,email) values ('" + getNome() + "' , '" + getEmail() + "')";
+
         con.executeSQL(sql);
         JOptionPane.showMessageDialog(null, "Registrado c sucesso");
     }
-    
-       public ResultSet consultar(){
+
+    public ResultSet consultar() {
         ResultSet tabela;
         tabela = null;
-        
-        String sql= "Select nome,email from usuario";
+
+        String sql = "Select nome,email from usuario";
         tabela = con.RetornarResultset(sql);
-     return tabela;   
+        return tabela;
     }
 }
