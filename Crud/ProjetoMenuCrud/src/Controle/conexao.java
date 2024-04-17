@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class conexao {
      final private String driver = "com.mysql.jdbc.Driver";
    
-    final private String url= "jdbc:mysql://127.0.0.1/Usuario";
+    final private String url= "jdbc:mysql://127.0.0.1/bancoJava";
     
     final private String usuario="root";
     final private String senha="";
