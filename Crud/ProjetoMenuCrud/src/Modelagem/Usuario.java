@@ -5,6 +5,10 @@
  */
 package Modelagem;
 
+import Controle.conexao;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fatec-dsm2
@@ -15,7 +19,8 @@ public class Usuario {
 
     public Usuario() {
     }
-
+     conexao con = new conexao();
+     
     public Usuario(int codigo, String nome, String email, String telefone, String senha) {
         this.codigo = codigo;
         this.nome = nome;
@@ -64,5 +69,37 @@ public class Usuario {
         this.senha = senha;
     }
     
+        public void cadastrarUsuario(){           
+      String sql= "Insert into usuarios(nome,email,telefone,senha)values "+
+                "('"+ getNome()+"','"+getEmail()+"','"+this.getTelefone()+"','"+ this.getSenha()+"' )";
+        con.executeSQL(sql);
+        JOptionPane.showMessageDialog(null, "Registrado com sucesso");     
+    }
+
+        
+     public ResultSet consultar(){
+        ResultSet tabela;
+        tabela = null;
+        
+        String sql= "Select * from usuario";
+        tabela = con.RetornarResultset(sql);
+     return tabela;   
+    }
+
+
+
+     public ResultSet consultarCampoEspecifico(){
+        ResultSet tabela;
+        tabela = null;
     
+        try{
+          String sql="Select * from usuario where nome like '"+ getNome()+"%'";
+          tabela= con.RetornarResultset(sql);                  
+       
+           }
+           catch(Exception sqle){
+                JOptionPane.showMessageDialog(null,"Atenção..."+sqle.getMessage());
+           }
+        return tabela;    
+    }
 }
