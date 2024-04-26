@@ -1,0 +1,33 @@
+    public void cadastrarUsuario(){           
+      String sql= "Insert into usuario(Nome,Telefone,Login,Senha)values "+
+                "('"+ this.getNome()+"','"+this.getTelefone()+"','"+this.getLogin()+"','"+ this.getSenha()+"' )";
+        con.executeSQL(sql);
+        JOptionPane.showMessageDialog(null, "Registrado com sucesso");     
+    }
+
+        
+     public ResultSet consultar(){
+        ResultSet tabela;
+        tabela = null;
+        
+        String sql= "Select * from usuario";
+        tabela = con.RetornarResultset(sql);
+     return tabela;   
+    }
+
+
+
+     public ResultSet consultarCampoEspecifico(){
+        ResultSet tabela;
+        tabela = null;
+    
+        try{
+          String sql="Select * from usuario where nome like '"+ getNome()+"%'";
+          tabela= con.RetornarResultset(sql);                  
+       
+           }
+           catch(Exception sqle){
+                JOptionPane.showMessageDialog(null,"Atenção..."+sqle.getMessage());
+           }
+        return tabela;    
+    }

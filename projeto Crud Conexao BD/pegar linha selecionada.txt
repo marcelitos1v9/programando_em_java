@@ -1,0 +1,9 @@
+       //para pegar o numero da linha selecionada na tabela  
+       int linhaSelecionada = jtbDadosCliente.getSelectedRow();
+       
+      //mostra as informações da linha selecionada na tabela na caixa de texto
+         txtCodigo.setText(jtbDadosCliente.getValueAt(linhaSelecionada , 0).toString());
+         txtNome.setText(jtbDadosCliente.getValueAt(linhaSelecionada , 1).toString());
+         txtLogin.setText(jtbDadosCliente.getValueAt(linhaSelecionada , 2).toString());
+         txtSenha.setText(jtbDadosCliente.getValueAt(linhaSelecionada , 3).toString());      
+         txtEmail.setText(jtbDadosCliente.getValueAt(linhaSelecionada , 4).toString());  
