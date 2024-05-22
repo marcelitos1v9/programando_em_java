@@ -23,6 +23,7 @@ public class FCadastro extends javax.swing.JFrame {
         consultarTodosPacientes();
     }
     Usuario usu = new Usuario();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,6 +58,7 @@ public class FCadastro extends javax.swing.JFrame {
         btn_limpar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbl_pacientes = new javax.swing.JTable();
+        btn_voltar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -200,6 +202,11 @@ public class FCadastro extends javax.swing.JFrame {
 
         btn_alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/pencil.png"))); // NOI18N
         btn_alterar.setText("Alterar");
+        btn_alterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_alterarActionPerformed(evt);
+            }
+        });
 
         btn_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/sair.png"))); // NOI18N
         btn_excluir.setText("Excluir");
@@ -233,6 +240,13 @@ public class FCadastro extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tbl_pacientes);
 
+        btn_voltar.setText("voltar");
+        btn_voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_voltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -243,35 +257,37 @@ public class FCadastro extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(74, 74, 74)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(216, 216, 216)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(74, 74, 74)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane3)
+                                .addComponent(btn_cadastrar)
+                                .addGap(91, 91, 91)
+                                .addComponent(btn_alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btn_cadastrar)
-                                        .addGap(91, 91, 91)
-                                        .addComponent(btn_alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(263, 263, 263)
-                                                .addComponent(jButton4))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(90, 90, 90)
-                                                .addComponent(btn_excluir)
-                                                .addGap(58, 58, 58)
-                                                .addComponent(btn_limpar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                        .addGap(0, 60, Short.MAX_VALUE)))
+                                        .addGap(263, 263, 263)
+                                        .addComponent(jButton4))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(90, 90, 90)
+                                        .addComponent(btn_excluir)
+                                        .addGap(58, 58, 58)
+                                        .addComponent(btn_limpar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 60, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(216, 216, 216)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_voltar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btn_voltar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,37 +331,65 @@ public class FCadastro extends javax.swing.JFrame {
         usu.setRgPaciente(txt_rg.getText());
         usu.setCpfPaciente(txt_cpf.getText());
         usu.setNascimentoPaciente(txt_data.getText());
-        
+
         usu.cadastrarUser();
         consultarTodosPacientes();
     }//GEN-LAST:event_btn_cadastrarActionPerformed
 
     private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
-                                              
-    // Verifica se uma linha foi selecionada na tabela de vendas
-    int linhaSelecionada = tbl_pacientes.getSelectedRow();
-    if (linhaSelecionada == -1) {
-        JOptionPane.showMessageDialog(null, "Selecione uma venda para excluir.");
-        return;
-    }
 
-    // Obtém o código da venda da linha selecionada
-    int codigopaciente = Integer.parseInt((String) tbl_pacientes.getValueAt(linhaSelecionada, 0));
+        // Verifica se uma linha foi selecionada na tabela de vendas
+        int linhaSelecionada = tbl_pacientes.getSelectedRow();
+        if (linhaSelecionada == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione uma venda para excluir.");
+            return;
+        }
 
-    // Confirmação da exclusão
-    int confirmacao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir este paciente?", "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION);
-    if (confirmacao == JOptionPane.YES_OPTION) {
-        // Chama o método para excluir a venda
-        usu.excluirpaciente(codigopaciente);
+        // Obtém o código da venda da linha selecionada
+        int codigopaciente = Integer.parseInt((String) tbl_pacientes.getValueAt(linhaSelecionada, 0));
 
-        // Atualiza a tabela de vendas após a exclusão
-        DefaultTableModel modeloTabela = (DefaultTableModel) tbl_pacientes.getModel();
-        modeloTabela.setRowCount(0); // Limpa a tabela antes de popular com os novos dados
-         consultarTodosPacientes(); // Preenche a tabela novamente com os dados atualizados
-    }
+        // Confirmação da exclusão
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir este paciente?", "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION);
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            // Chama o método para excluir a venda
+            usu.excluirpaciente(codigopaciente);
+
+            // Atualiza a tabela de vendas após a exclusão
+            DefaultTableModel modeloTabela = (DefaultTableModel) tbl_pacientes.getModel();
+            modeloTabela.setRowCount(0); // Limpa a tabela antes de popular com os novos dados
+            consultarTodosPacientes(); // Preenche a tabela novamente com os dados atualizados
+        }
 
 
     }//GEN-LAST:event_btn_excluirActionPerformed
+
+    private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
+      int linhaSelecionada = tbl_pacientes.getSelectedRow(); // Supondo que tbl_pacientes é a tabela de pacientes
+        if (linhaSelecionada == -1) {
+        JOptionPane.showMessageDialog(null, "Selecione um paciente para alterar.");
+        return;
+    }
+
+    int idPacienteAtual = Integer.parseInt((String) tbl_pacientes.getValueAt(linhaSelecionada, 0)); // Supondo que o ID do paciente está na primeira coluna da tabela
+
+    String novoNomePaciente = txt_nome.getText();
+    String novoEnderecoPaciente = txt_endereco.getText();
+    String novoComplementoPaciente = txt_complemento.getText();
+    String novoRgPaciente = txt_rg.getText();
+    String novoCpfPaciente = txt_cpf.getText();
+    String novoNascimentoPaciente = txt_data.getText(); // Supondo que txt_nascimento é o campo de texto para a data de nascimento do paciente
+
+    usu.alterarPaciente(idPacienteAtual, novoNomePaciente, novoEnderecoPaciente, novoComplementoPaciente, novoRgPaciente, novoCpfPaciente, novoNascimentoPaciente);
+
+    // Após a alteração, você pode optar por atualizar a tabela de pacientes (se necessário)
+    consultarTodosPacientes(); // Método para 
+    }//GEN-LAST:event_btn_alterarActionPerformed
+
+    private void btn_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_voltarActionPerformed
+        Fmenu Fmenu = new Fmenu();
+        Fmenu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_voltarActionPerformed
 
     private void consultarTodosPacientes() {
         DefaultTableModel modeloTabela = (DefaultTableModel) tbl_pacientes.getModel();
@@ -393,6 +437,7 @@ public class FCadastro extends javax.swing.JFrame {
     private javax.swing.JButton btn_cadastrar;
     private javax.swing.JButton btn_excluir;
     private javax.swing.JButton btn_limpar;
+    private javax.swing.JButton btn_voltar;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

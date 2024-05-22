@@ -152,7 +152,28 @@ public class Usuario {
     String sql;
     sql = "DELETE FROM pacientes WHERE id_paciente = " + codigo;
     con.executeSQL(sql);
-    JOptionPane.showMessageDialog(null, "Venda excluída com sucesso");
+    JOptionPane.showMessageDialog(null, "Paciente excluído com sucesso");
+}
+     
+    public void alterarVenda(int codigoAtual, int novoCodigo, String novoNomeVendedor, String novoProdutoVendido) {
+    String sql;
+    sql = "UPDATE vendas SET codigo = '" + novoCodigo + "', nm_vendedor = '" + novoNomeVendedor + "', nm_produto = '" + novoProdutoVendido + "' WHERE codigo = " + codigoAtual;
+    con.executeSQL(sql);
+    JOptionPane.showMessageDialog(null, "Venda alterada com sucesso");
+}
+
+    public void alterarPaciente(int idPacienteAtual, String novoNomePaciente, String novoEnderecoPaciente, String novoComplementoPaciente, String novoRgPaciente, String novoCpfPaciente, String novoNascimentoPaciente) {
+    String sql;
+    sql = "UPDATE pacientes SET "
+          + "nome_paciente = '" + novoNomePaciente + "', "
+          + "endereco_paciente = '" + novoEnderecoPaciente + "', "
+          + "complemento_paciente = '" + novoComplementoPaciente + "', "
+          + "rg_paciente = '" + novoRgPaciente + "', "
+          + "cpf_paciente = '" + novoCpfPaciente + "', "
+          + "nascimento_paciente = '" + novoNascimentoPaciente + "' "
+          + "WHERE id_paciente = " + idPacienteAtual;
+    con.executeSQL(sql);
+    JOptionPane.showMessageDialog(null, "Dados do paciente alterados com sucesso");
 }
 
 }
