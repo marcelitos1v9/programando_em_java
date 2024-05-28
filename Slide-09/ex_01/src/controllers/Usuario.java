@@ -17,7 +17,7 @@ import models.conexao;
 public class Usuario {
 
     private conexao con = new conexao();
-    private String login, senha,nomePaciente,enderecoPaciente,complementoPaciente,rgPaciente,cpfPaciente,nascimentoPaciente;
+    private String login, senha, nomePaciente, enderecoPaciente, complementoPaciente, rgPaciente, cpfPaciente, nascimentoPaciente;
 
     public Usuario() {
     }
@@ -32,7 +32,7 @@ public class Usuario {
         this.cpfPaciente = cpfPaciente;
         this.nascimentoPaciente = nascimentoPaciente;
     }
-    
+
     public conexao getCon() {
         return con;
     }
@@ -104,7 +104,7 @@ public class Usuario {
     public void setNascimentoPaciente(String nascimentoPaciente) {
         this.nascimentoPaciente = nascimentoPaciente;
     }
-  
+
     public ResultSet logar() {
         ResultSet tabela;
 
@@ -114,66 +114,58 @@ public class Usuario {
         tabela = con.RetornarResultset(sql);
         return tabela;
     }
-    
+
     public void cadastrarUser() {
-     String sql;
-    sql = "INSERT INTO pacientes (nome_paciente, endereco_paciente, complemento_paciente, rg_paciente, cpf_paciente, nascimento_paciente) VALUES ('" 
-          + getNomePaciente() + "', '" 
-          + getEnderecoPaciente() + "', '" 
-          + getComplementoPaciente() + "', '" 
-          + getRgPaciente() + "', '" 
-          + getCpfPaciente() + "', '" 
-          + getNascimentoPaciente() + "')";
-    con.executeSQL(sql);
-    JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso");
+        String sql;
+        sql = "INSERT INTO pacientes (nome_paciente, endereco_paciente, complemento_paciente, rg_paciente, cpf_paciente, nascimento_paciente) VALUES ('"
+                + getNomePaciente() + "', '"
+                + getEnderecoPaciente() + "', '"
+                + getComplementoPaciente() + "', '"
+                + getRgPaciente() + "', '"
+                + getCpfPaciente() + "', '"
+                + getNascimentoPaciente() + "')";
+        con.executeSQL(sql);
+        JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso");
     }
 
-      
     public void consultarPaciente(DefaultTableModel modeloTabela) {
-    String sql = "SELECT * FROM pacientes";
-    ResultSet rs = con.RetornarResultset(sql);
-    try {
-        while (rs.next()) {
-            String[] linha = {
-                rs.getString("id_paciente"),
-                rs.getString("nome_paciente"),
-                rs.getString("endereco_paciente"),
-                rs.getString("rg_paciente"),
-                rs.getString("cpf_paciente"),
-                rs.getString("nascimento_paciente"),
-            };
-            modeloTabela.addRow(linha);
+        String sql = "SELECT * FROM pacientes";
+        ResultSet rs = con.RetornarResultset(sql);
+        try {
+            while (rs.next()) {
+                String[] linha = {
+                    rs.getString("id_paciente"),
+                    rs.getString("nome_paciente"),
+                    rs.getString("endereco_paciente"),
+                    rs.getString("rg_paciente"),
+                    rs.getString("cpf_paciente"),
+                    rs.getString("nascimento_paciente"),};
+                modeloTabela.addRow(linha);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar vendas: " + e.getMessage());
         }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Erro ao consultar vendas: " + e.getMessage());
     }
-}
-     public void excluirpaciente(int codigo) {
-    String sql;
-    sql = "DELETE FROM pacientes WHERE id_paciente = " + codigo;
-    con.executeSQL(sql);
-    JOptionPane.showMessageDialog(null, "Paciente excluído com sucesso");
-}
-     
-    public void alterarVenda(int codigoAtual, int novoCodigo, String novoNomeVendedor, String novoProdutoVendido) {
-    String sql;
-    sql = "UPDATE vendas SET codigo = '" + novoCodigo + "', nm_vendedor = '" + novoNomeVendedor + "', nm_produto = '" + novoProdutoVendido + "' WHERE codigo = " + codigoAtual;
-    con.executeSQL(sql);
-    JOptionPane.showMessageDialog(null, "Venda alterada com sucesso");
-}
+
+    public void excluirpaciente(int codigo) {
+        String sql;
+        sql = "DELETE FROM pacientes WHERE id_paciente = " + codigo;
+        con.executeSQL(sql);
+        JOptionPane.showMessageDialog(null, "Paciente excluído com sucesso");
+    }
 
     public void alterarPaciente(int idPacienteAtual, String novoNomePaciente, String novoEnderecoPaciente, String novoComplementoPaciente, String novoRgPaciente, String novoCpfPaciente, String novoNascimentoPaciente) {
-    String sql;
-    sql = "UPDATE pacientes SET "
-          + "nome_paciente = '" + novoNomePaciente + "', "
-          + "endereco_paciente = '" + novoEnderecoPaciente + "', "
-          + "complemento_paciente = '" + novoComplementoPaciente + "', "
-          + "rg_paciente = '" + novoRgPaciente + "', "
-          + "cpf_paciente = '" + novoCpfPaciente + "', "
-          + "nascimento_paciente = '" + novoNascimentoPaciente + "' "
-          + "WHERE id_paciente = " + idPacienteAtual;
-    con.executeSQL(sql);
-    JOptionPane.showMessageDialog(null, "Dados do paciente alterados com sucesso");
-}
+        String sql;
+        sql = "UPDATE pacientes SET "
+                + "nome_paciente = '" + novoNomePaciente + "', "
+                + "endereco_paciente = '" + novoEnderecoPaciente + "', "
+                + "complemento_paciente = '" + novoComplementoPaciente + "', "
+                + "rg_paciente = '" + novoRgPaciente + "', "
+                + "cpf_paciente = '" + novoCpfPaciente + "', "
+                + "nascimento_paciente = '" + novoNascimentoPaciente + "' "
+                + "WHERE id_paciente = " + idPacienteAtual;
+        con.executeSQL(sql);
+        JOptionPane.showMessageDialog(null, "Dados do paciente alterados com sucesso");
+    }
 
 }
