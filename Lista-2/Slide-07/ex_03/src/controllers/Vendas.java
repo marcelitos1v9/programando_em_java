@@ -55,43 +55,40 @@ public class Vendas {
     }
 
     public void cadastrarVenda() {
-    String sql;
-    sql = "INSERT INTO vendas(codigo, nm_vendedor, nm_produto) VALUES ('" + getCodigo() + "', '" + getNomeVendedor() + "', '" + getProdutoVendido() + "')";
-    con.executeSQL(sql);
-    JOptionPane.showMessageDialog(null, "Venda registrada com sucesso");
-}
-
-    
-    public void consultarVenda(DefaultTableModel modeloTabela) {
-    String sql = "SELECT * FROM vendas";
-    ResultSet rs = con.RetornarResultset(sql);
-    try {
-        while (rs.next()) {
-            String[] linha = {
-                rs.getString("codigo"),
-                rs.getString("nm_vendedor"),
-                rs.getString("nm_produto"),
-            };
-            modeloTabela.addRow(linha);
-        }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Erro ao consultar vendas: " + e.getMessage());
+        String sql;
+        sql = "INSERT INTO vendas(codigo, nm_vendedor, nm_produto) VALUES ('" + getCodigo() + "', '" + getNomeVendedor() + "', '" + getProdutoVendido() + "')";
+        con.executeSQL(sql);
+        JOptionPane.showMessageDialog(null, "Venda registrada com sucesso");
     }
-}
+
+    public void consultarVenda(DefaultTableModel modeloTabela) {
+        String sql = "SELECT * FROM vendas";
+        ResultSet rs = con.RetornarResultset(sql);
+        try {
+            while (rs.next()) {
+                String[] linha = {
+                    rs.getString("codigo"),
+                    rs.getString("nm_vendedor"),
+                    rs.getString("nm_produto"),};
+                modeloTabela.addRow(linha);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar vendas: " + e.getMessage());
+        }
+    }
 
     public void excluirVenda(int codigo) {
-    String sql;
-    sql = "DELETE FROM vendas WHERE codigo = " + codigo;
-    con.executeSQL(sql);
-    JOptionPane.showMessageDialog(null, "Venda excluída com sucesso");
-}
+        String sql;
+        sql = "DELETE FROM vendas WHERE codigo = " + codigo;
+        con.executeSQL(sql);
+        JOptionPane.showMessageDialog(null, "Venda excluída com sucesso");
+    }
 
-   public void alterarVenda(int codigoAtual, int novoCodigo, String novoNomeVendedor, String novoProdutoVendido) {
-    String sql;
-    sql = "UPDATE vendas SET codigo = '" + novoCodigo + "', nm_vendedor = '" + novoNomeVendedor + "', nm_produto = '" + novoProdutoVendido + "' WHERE codigo = " + codigoAtual;
-    con.executeSQL(sql);
-    JOptionPane.showMessageDialog(null, "Venda alterada com sucesso");
-}
-
+    public void alterarFilme(int codigoAtual, int novoCodigo, String novoTitulo, String novoGenero, String novaProdutora, String novaDataCompra) {
+        String sql;
+        sql = "UPDATE filmes SET codigo = " + novoCodigo + ", titulo = '" + novoTitulo + "', genero = '" + novoGenero + "', produtora = '" + novaProdutora + "', datacompra = '" + novaDataCompra + "' WHERE codigo = " + codigoAtual;
+        con.executeSQL(sql);
+        JOptionPane.showMessageDialog(null, "Filme alterado com sucesso");
+    }
 
 }
